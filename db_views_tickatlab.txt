@@ -1,0 +1,76 @@
+--------------------------------------------------------
+-- TICKATLAB_LIFELINES.VMUTATION source
+--------------------------------------------------------
+
+CREATE OR REPLACE VIEW TICKATLAB_LIFELINES.VMUTATION
+(ID,MUTATION)
+AS
+select BreedingAnimal.id,
+listagg (geneticmodificationassignment.description || ' ' || geneticmodificationassignment.genotype, ', ') as "MUTATION"
+from TICKATLAB_TEST.BreedingAnimal BreedingAnimal
+LEFT  JOIN TICKATLAB_TEST.geneticmodificationassignment geneticmodificationassignment on BreedingAnimal.id = geneticmodificationassignment.referenceid
+group by BreedingAnimal.id;
+
+--------------------------------------------------------
+-- TICKATLAB_LIFELINES.VGENETICMODIFICATIONASSIGNMENT 
+--------------------------------------------------------
+
+CREATE OR REPLACE VIEW TICKATLAB_LIFELINES.VGENETICMODIFICATIONASSIGNMENT
+(ID,DESCRIPTION,GENOTYPE,REFERENCEID)
+AS
+select gmodassign.id, gmodassign.description, gmodassign.genotype, gmodassign.referenceid  from tickatlab_test.geneticmodificationassignment gmodassign;
+
+
+
+--------------------------------------------------------
+-- TICKATLAB_LIFELINES.LOCATIONS source
+--------------------------------------------------------
+CREATE OR REPLACE VIEW TICKATLAB_LIFELINES.LOCATIONS
+(LOCATION)
+AS
+SELECT Locations.Name from tickatlab_test.LOCATIONS;
+
+
+
+--------------------------------------------------------
+--  DDL for View FISH
+--------------------------------------------------------
+
+CREATE OR REPLACE VIEW TICKATLAB_LIFELINES.FISH
+(ID,ANIMALNUMBER,IDENTIFIER1,IDENTIFIER2,IDENTIFIER3,IDENTIFIER4,DEAD,SEX,NUMBEROFANIMALS,DATEOFBIRTH,DAYOFDEATH,NUMBEROFEXPERIMENTS,NOTES,STRAINID,EXITREASONID,EXITREASON,LOCATION,LICENSE,STRAIN,MUTATION,SPECIESID)
+AS
+SELECT BreedingAnimal.id,
+       CASE 
+		WHEN BreedingAnimal.identifier1 is NULL THEN BreedingAnimal.animalnumber
+		WHEN BreedingAnimal.IDENTIFIER1 IS NOT NULL AND BreedingAnimal.IDENTIFIER2 IS NULL THEN concat(concat(BreedingAnimal.animalnumber,'//'),BreedingAnimal.IDENTIFIER1)
+		WHEN BreedingAnimal.IDENTIFIER2 IS NOT NULL AND BreedingAnimal.IDENTIFIER1 IS NOT NULL AND BreedingAnimal.IDENTIFIER3 IS NULL THEN 
+		concat(concat(concat(concat(BreedingAnimal.animalnumber,'//'),BreedingAnimal.IDENTIFIER1),''),BreedingAnimal.IDENTIFIER2)
+		ELSE 'Error' END AS animalnumber,
+	   BreedingAnimal.IDENTIFIER1 as identifier1,
+       BreedingAnimal.IDENTIFIER2 as identifier2,
+       BreedingAnimal.IDENTIFIER3 as identifier3,
+       BreedingAnimal.IDENTIFIER4 as identifier4,
+       BreedingAnimal.DEAD as isdead,
+	   BreedingAnimal.sex,
+	   BreedingAnimal.QUANTITY as NUMBEROFANIMALS,
+	   BreedingAnimal.DATEOFBIRTH,
+	   BreedingAnimal.DAYOFDEATH,
+       BreedingAnimal.NumberOfExperiments,
+	   BreedingAnimal.notes,
+       BreedingAnimal.STRAINID,
+       breedinganimal.exitreasonid,
+       catalog.Name as "EXITREASON",
+	   Locations.Name as "LOCATION",
+	   basetable.objectid as "LICENSE",
+	   Taxonomiccatalog.name as "STRAIN",
+	   vmutation.mutation  as "MUTATION",
+	   BreedingAnimal.speciesId
+       from tickatlab_test.BreedingAnimal BreedingAnimal
+	   INNER JOIN tickatlab_test.Locations Locations ON BreedingAnimal.roomid = Locations.id
+	   INNER JOIN tickatlab_test.Taxonomiccatalog Taxonomiccatalog ON BreedingAnimal.strainid = Taxonomiccatalog.id
+	   INNER JOIN tickatlab_test.Teamrecord Teamrecord ON BreedingAnimal.teamid = teamrecord.id
+	   INNER JOIN tickatlab_test.Basetable Basetable ON BreedingAnimal.projectid = Basetable.id
+	   LEFT  JOIN tickatlab_test.CATALOG Catalog ON BreedingAnimal.EXITREASONID = Catalog.id  
+       LEFT  JOIN tickatlab_lifelines.vmutation vmutation on BreedingAnimal.id = vmutation.id
+       -- LEFT  JOIN tickatlab_test.tagindexrecord tagindexrecord on BreedingAnimal.id = tagindexrecord.objectid
+       WHERE BreedingAnimal.QUANTITY > 0;

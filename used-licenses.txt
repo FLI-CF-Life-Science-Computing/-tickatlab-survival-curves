@@ -1,0 +1,4 @@
+dash: MIT License
+lifelines: MIT License
+plotly: MIT License
+oracledb: Universal Permissive License (UPL), Apache License

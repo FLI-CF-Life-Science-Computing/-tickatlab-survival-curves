@@ -1,0 +1,6 @@
+dash
+lifelines
+plotly
+oracledb
+redis
+dash_daq
