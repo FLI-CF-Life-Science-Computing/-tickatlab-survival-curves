@@ -2,6 +2,8 @@ Introduction
 ============
 **Tickatlab Survival Curves** is a webservice for research institutes to create [Kaplan-Meier survival curves](https://en.wikipedia.org/wiki/Kaplan-Meier_estimator). It has been developed at the [Leibniz institute for aging research](http://www.leibniz-fli.de) in Jena. It uses the animal database [Tick@lab](https://www.a-tune.com/products-services-software/animal-research-facility-software/) as datasource.
 
+![](screenshot.png)
+
 Contact
 =======
 
