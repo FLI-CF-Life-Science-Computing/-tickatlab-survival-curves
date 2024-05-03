@@ -4,25 +4,6 @@ Introduction
 
 ![](screenshot.png)
 
-Contact
-=======
-
-Technical and application support: Fabian Monheim ([CF Life Science
-Computing](https://www.leibniz-fli.de/research/core-facilities-services/cf-life-science-computing)), <fabian.monheim@leibniz-fli.de>, 03641-65-6872
-
-Content support: [Animal Facility](https://www.leibniz-fli.de/research/animal-experiments/animal-facility-fish-1)
-
-License
-=======
-
-The software was developed at the Leibniz Institute on Aging - Fritz
-Lipmann Institute (FLI; <http://www.leibniz-fli.de/>) under a mixed
-licensing model. Researchers at academic and non-profit organizations
-can use anishare using the included license, while for-profit
-organizations are required to purchase a license. By downloading the
-package you agree with conditions of the FLI Software License Agreement
-for Academic Non-commercial Research ([LICENSE.pdf](LICENSE.pdf)).
-
 Installation 
 ============
 
@@ -41,5 +22,24 @@ The application was developed with [Dash Plotly](https://dash.plotly.com/), a lo
 - [ ] create database views from file db_views_tickatlab.txt
 - [ ] customize licenses.py, locations.py, strain_dropdown.py and app.py (Censored Criteria, Criteria)
 - [ ] start with ```python app.py```
+
+License
+=======
+
+The software was developed at the Leibniz Institute on Aging - Fritz
+Lipmann Institute (FLI; <http://www.leibniz-fli.de/>) under a mixed
+licensing model. Researchers at academic and non-profit organizations
+can use anishare using the included license, while for-profit
+organizations are required to purchase a license. By downloading the
+package you agree with conditions of the FLI Software License Agreement
+for Academic Non-commercial Research ([LICENSE.pdf](LICENSE.pdf)).
+
+Contact
+=======
+
+Technical and application support: Fabian Monheim ([CF Life Science
+Computing](https://www.leibniz-fli.de/research/core-facilities-services/cf-life-science-computing)), <fabian.monheim@leibniz-fli.de>, 03641-65-6872
+
+Content support: [Animal Facility](https://www.leibniz-fli.de/research/animal-experiments/animal-facility-fish-1)
 
 
