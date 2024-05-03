@@ -7,8 +7,8 @@ Introduction
 Contact
 =======
 
-Technical and application support: Fabian Monheim (CF Life Science
-Computing), <fabian.monheim@leibniz-fli.de>, 03641-65-6872
+Technical and application support: Fabian Monheim ([CF Life Science
+Computing](https://www.leibniz-fli.de/research/core-facilities-services/cf-life-science-computing)), <fabian.monheim@leibniz-fli.de>, 03641-65-6872
 
 Content support: [Animal Facility](https://www.leibniz-fli.de/research/animal-experiments/animal-facility-fish-1)
 
