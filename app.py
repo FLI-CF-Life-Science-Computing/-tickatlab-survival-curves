@@ -381,7 +381,7 @@ def initial_set_sessionid(session_id):
             ]
         }
         x = json.dumps(jsonlist)
-        redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+        redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
         redis_instance.hset("data", session_id, x)
         return session_id
 
@@ -446,7 +446,7 @@ def update_strain(strain,options, plotline_value,session_id,new_strain_info):
                 else:
                     strain_id_exist = 0
             options[strain_id] = strain_dropdown.strain_data[strain]
-            redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+            redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
             var_session = json.loads(redis_instance.hget("data", session_id)) # hole die bisher gespeicherten Filterwerte zu der Session
             #print(var_session)
             for i in range(0,len(var_session['lines'])): # Falls eine bereits gespeicherter Datensatz verändert wurde
@@ -489,7 +489,7 @@ def update_plotline(plotline_value,session_id):
         if plotline_value == '00000000':
             logger.warning('update_plotline: no_update')
             return no_update
-        redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+        redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
         var_session = json.loads(redis_instance.hget("data", session_id)) # hole die bisher gespeicherten Filterwerte zu der Session
         #print("update_plotline",var_session)
         logger.warning('update_plotline: {}, len(session) {}:'.format(session_id, len(var_session['lines'])))
@@ -613,7 +613,7 @@ def delete_plot(clicks1,plotline_options, plotline_value, session_id):
     try:
         if "btn-delete-plot" == ctx.triggered_id:
             
-            redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+            redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
             var_session = json.loads(redis_instance.hget("data", session_id)) # hole die bisher gespeicherten Filterwerte zu der Session
             for i in range(0,len(var_session['lines'])): # Falls eine bereits gespeicherter Datensatz verändert wurde
                 if var_session['lines'][i]["strain_id"] == plotline_value: # Suche den passenden Datensatz
@@ -647,7 +647,7 @@ Erstellt den Plot neu, wenn etwas am Layout angepasst wurde
 )
 def update_graphic_style(color,legend_text,session_id, strain, plotline_value, plotline_options):
     try:
-        redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+        redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
         var_session = json.loads(redis_instance.hget("data", session_id)) 
         logger.warning('update_graphic_style: {}, len(session) {}:'.format(session_id, len(var_session['lines'])))
         for i in range(0,len(var_session['lines'])): # Falls eine bereits gespeicherter Datensatz verändert wurde
@@ -923,7 +923,7 @@ def update_plot(isused, startdate, enddate, sex, exitreasonlist,exitcensored,loc
                     }
 
                 #print(strain_dict)
-                redis_instance = redis.StrictRedis.from_url(os.environ.get("REDIS_URL", "redis://127.0.0.1:6379"))
+                redis_instance = redis.StrictRedis.from_url(local_settings.REDIS_URL)
                 var_session = json.loads(redis_instance.hget("data", session_id)) # hole die bisher gespeicherten Filterwerte zu der Session 
                 #print("update_plot",len(var_session))
                 logger.warning('update_plot1: {}, len(session) {}:'.format(session_id, len(var_session['lines'])))
