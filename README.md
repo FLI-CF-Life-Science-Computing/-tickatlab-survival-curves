@@ -23,8 +23,15 @@ for Academic Non-commercial Research (*LICENSE.pdf*).
 
 Installation 
 ============
+
+### Requirements
+Redis (Key-Value Store) --> https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-linux/
+
+### Explanation
 The application was developed with [Dash Plotly](https://dash.plotly.com/), a low-code framework for rapidly building data apps in Python. It uses mainly the Python [survival analysis library lifelines](https://lifelines.readthedocs.io/en/latest/). For the Python environment we recommend a virtual environment such as pipenv or virtualenv. All required packages are listed in the file *requirements.txt*. To access the database a new database user should be created to access the Tick@lab database. The connection information to the database is stored in the file *local_settings.py*. You can use the file *template_local_settings.py* and rename it.The app accesses extra database views you have to create. You find the SQL commands to create the needed views in the file *db_views_tickatlab.txt*. Furthermore it is necessary to transfer the database ids of strains and cancel and censored criteria.
 
+### check points
+- [ ] install redis https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-linux/
 - [ ] git clone https://gitlab.leibniz-fli.de/fmonheim/tickatlab-survival-curves.git
 - [ ] create virtual environment like pipenv (```pipenv shell```)
 - [ ] install packages from requirements.txt (```pip install -r requirements.txt```)
